@@ -30,4 +30,12 @@ class Blog(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     posted_on = db.Column(db.DateTime, default = datetime.utcnow().strftime('%d %b %Y'))
     # relationships will relate to the comment model
-    
+
+
+class Comment(db.Model):
+    __tablename__='comments'
+
+    id = db.Column(db.Integer,primary_key=True)
+    description = db.Column(db.Text)
+    blog_id = db.Column(db.Integer,db.ForeignKey('bloggs.id'),nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)

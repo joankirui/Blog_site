@@ -60,8 +60,14 @@ def delete_Comment(comment_id,blog_id):
     db.session.delete(comment)
     db.session.commit()
     return redirect(url_for("main.new_blog", id = blog_id))
-    
 
+@main.route('/deleteblog/<int:blog_id>', methods=["GET", "POST"])  
+def delete_blog(blog_id):
+    blog = Blog.query.filter_by(id=blog_id).first()
+    uname = current_user.username
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect(url_for("main.proile", uname = uname))
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()

@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class Quotes:
     def __init__(self,author,id,quote):

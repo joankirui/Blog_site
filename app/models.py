@@ -19,3 +19,15 @@ class User(db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+
+class Blog(db.Model):
+    __tablename__='bloggs'
+
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(255))
+    blog_content = db.Column(db.String(255),index=True)
+    author = db.Column(db.String(255))
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    posted_on = db.Column(db.DateTime, default = datetime.utcnow().strftime('%d %b %Y'))
+    # relationships will relate to the comment model
+    

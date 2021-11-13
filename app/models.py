@@ -31,6 +31,9 @@ class Blog(db.Model):
     posted_on = db.Column(db.DateTime, default = datetime.utcnow().strftime('%d %b %Y'))
     # relationships will relate to the comment model
 
+    def __repr__(self):
+        return f'Blog {self.blog_content}'
+
 
 class Comment(db.Model):
     __tablename__='comments'
@@ -39,3 +42,13 @@ class Comment(db.Model):
     description = db.Column(db.Text)
     blog_id = db.Column(db.Integer,db.ForeignKey('bloggs.id'),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+
+    def __repr__(self):
+        return f'Comment : id: {self.id} comment: {self.description}'
+
+class Subscription(db.Model):
+    __tablename__='subscriptions'
+    id = db.Column(db.Integer,primary_key=True)
+    email = db.Column(db.String(255),unique=True,index=True)
+    def __repr__(self):
+        return f'User{self.email}'

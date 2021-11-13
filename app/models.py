@@ -33,6 +33,7 @@ class Blog(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     posted_on = db.Column(db.DateTime, default = datetime.utcnow().strftime('%d %b %Y'))
     # relationships will relate to the comment model
+    comments = db.relationship('Comment',backref='blog',lazy='dynamic')
 
     def __repr__(self):
         return f'Blog {self.blog_content}'

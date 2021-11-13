@@ -1,5 +1,5 @@
 from flask_login import login_required,current_user
-from flask_wtf import form
+from ..request import get_quotes
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from ..models import User,Blog,Comment,Subscription
@@ -11,7 +11,8 @@ def index():
     blog = Blog.query.all()
     title = "Welcome to Blogsite"
     # Getting the quotes
-    # quotes = get_quotes
+    quotes = get_quotes()
+    print(quotes)
 
     form = SubscribeForm()
     if form.validate_on_submit():

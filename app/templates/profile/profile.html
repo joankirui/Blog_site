@@ -20,7 +20,7 @@
             {%if user.profile_pic_path%}
             <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
             {%else%}
-            <p>Profile picture not availabe</p>
+            <p>Profile picture not available</p>
             {%endif%}
 
             {%if user==current_user%}

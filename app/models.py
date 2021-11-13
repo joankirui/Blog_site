@@ -27,6 +27,14 @@ class User(UserMixin,db.Model):
     blog = db.relationship('Blog', backref='user', lazy='dynamic')
     comments = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -53,6 +61,19 @@ class Blog(db.Model):
     # relationships will relate to the comment model
     comments = db.relationship('Comment',backref='blog',lazy='dynamic')
 
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def get_blogs(cls,id):
+        blogs = Blog.query.filter_by(blog_id = id).desc().all()
+        return blogs
+        
     def __repr__(self):
         return f'Blog {self.blog_content}'
 
@@ -65,6 +86,14 @@ class Comment(db.Model):
     blog_id = db.Column(db.Integer,db.ForeignKey('bloggs.id'),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
 
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     def __repr__(self):
         return f'Comment : id: {self.id} comment: {self.description}'
 
@@ -72,5 +101,6 @@ class Subscription(db.Model):
     __tablename__='subscriptions'
     id = db.Column(db.Integer,primary_key=True)
     email = db.Column(db.String(255),unique=True,index=True)
+
     def __repr__(self):
         return f'User{self.email}'

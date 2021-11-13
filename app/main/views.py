@@ -68,6 +68,19 @@ def delete_blog(blog_id):
     db.session.delete(blog)
     db.session.commit()
     return redirect(url_for("main.proile", uname = uname))
+
+@main.route('/updateblog/<int:blog_id>', methods=["GET", "POST"])
+def edit_blog(blog_id):
+    form = UpdateBlog()
+    if form.validate_on_submit():
+        updates = form.updates.data
+        blog = Blog.query.filter_by(id = blog_id).updates({"updates":updates})
+        db.session.commit()
+        return redirect(url_for("main.profile", uname = current_user.username))
+    else:
+        form.updates.data = Blog.query.filter_by(id = blog_id).first()
+    return render_template("update-blog.html",updateblog_form = form)
+    
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()

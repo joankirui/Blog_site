@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+   <div class="container" id="cov">
+       <div class="row">
+           <div class="col-md-8">
+                {% if blog%}
+                {% for item in blog %}
+                
+                  <h3>{{item.title}}</h3>
+                    <p>Post: {{item.blog_content}}</p>
+                    <p class="text-muted"> Posted by: {{item.user.username}} <br> On: {{item.posted_on}}</p>
+                    <a href="{{url_for('main.new_comment',blog_id=item.id)}}"><button class="btn btn-sm">
+                        <i class="fa fa-comments" style="font-size: 32px; color: turquoise;"></i>
+                    </button></a>
+                    
+                {% endfor %}
+            {% endif%}
+           </div>
+           <div class="col-md-4">
+                <h5 class="text-center" style="font-family: 'Mansalva', cursive; text-decoration:underline;font-size:30px;">
+                        Quote of the day</h5>
+                    <p class="text-center" style="font-family: 'Dancing Script', cursive; font-size: 42px;">{{quotes.quote}}</p>
+                    <p class="text-muted text-center"><em>By: ~{{quotes.author}}~</em></p>
+           </div>
+       </div>
+           </div>
+       </div>
+   </div>
+{% endblock %}

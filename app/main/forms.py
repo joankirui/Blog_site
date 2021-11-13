@@ -12,4 +12,7 @@ class NewBlog(FlaskForm):
     blog_content = TextAreaField('Blog to post',validators=[Required()])
     author = StringField('Author',validators=[Required()])
     submit = SubmitField('submit')
-    
+
+class MyComment(FlaskForm):
+    description = TextAreaField('Tell us what you think',validators=[Required()])
+    submit = SubmitField('submit')

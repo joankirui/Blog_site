@@ -16,3 +16,11 @@ class NewBlog(FlaskForm):
 class MyComment(FlaskForm):
     description = TextAreaField('Tell us what you think',validators=[Required()])
     submit = SubmitField('submit')
+
+class UpdateBlog(FlaskForm):
+    updates = TextAreaField('update your blog',validators=[Required()])
+    submit = SubmitField('submit')
+
+class SubscribeForm(FlaskForm):
+    email = StringField('Your email address',validators=[Required(),Email()])
+    submit = SubmitField('submit')

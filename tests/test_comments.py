@@ -1,5 +1,5 @@
 import unittest
-from app.models import Comment,Blog
+from app.models import Comment,Blog,User
 from app import db
 
 class TestBlog(unittest.TestCase):
@@ -9,7 +9,7 @@ class TestBlog(unittest.TestCase):
 
     def tearDown(self):
         db.session.delete(self)
-        db.session.commit() 
+        User.query.commit() 
     def test_instance(self):
         self.assertTrue(isinstance(self.new_comment.comment,"comment"))
     def test_check_instance_variables(self):

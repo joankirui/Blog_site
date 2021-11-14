@@ -24,6 +24,13 @@
     * Run the application python3.6 manage.py runserver
     * Push your changes so we can have a view!
 ## BDD
+|Behaviour|Input|Output|
+|---------|-----|------|
+|Load page|On page load|Get all blogs,select between sign up and login|
+|select signup|email,username,password|redirect to login|
+|select login|username and password|redirect to page with blogs that have been posted by writers and be able to subscribe to the blog|
+|select comment button|comment|form that you input your comment|
+|click on submit||redirect to all comments template with your comment and other comments|
 
 ## Technologies used
     * Python3.6

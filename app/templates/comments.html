@@ -12,7 +12,7 @@
             {% for comment in comments %}
             <p>{{comment.description}}</p>
             <p class="text-muted">By: {{comment.user.username}}</p>
-            <a href=""><i class="fa fa-trash" style="color: blue;font-size: 20px;" ></i></a>
+            <a href="{{url_for('main.delete_Comment',comment_id = comment.id,blog_id = comment.id)}}"><i class="fa fa-trash" style="color: blue;font-size: 20px;" ></i></a>
             {% endfor %}
             {% else %}
             <h4>This post doesn't have any comments yet!</h4>

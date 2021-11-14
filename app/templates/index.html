@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
-
+{% import 'macros.html' as macro %}
 {% block content %}
    <div class="container" id="cov">
        <div class="row">
@@ -14,12 +14,10 @@
                     <a href="{{url_for('main.new_comment',blog_id=item.id)}}"><button class="btn btn-sm">
                         <i class="fa fa-comments" style="font-size: 20px; color: brown;"></i>
                     </button></a>
+                    <a href="{{url_for('main.edit_blog',blog_id = item.id)}}"><button class="btn btn-sm"><i class="fa fa-edit" style="font-size: 20px;color: chocolate;"></i></button></a>
+                    <a href="{{url_for('main.delete_blog',site_id = item.id)}}"><button class="btn btn-sm"><i class="fa fa-trash" style="font-size: 20px;color: coral;"></i></button></a>
                     {% endfor %}
                     {% endif%}
-                    {% if user == current_user %}
-                    <a href="{{url_for('main.edit_blog',blog_id = user.id)}}"><button class="btn btn-sm"><i class="fa-solid fa-pen-to-square" style="font-size: 20px;color: chocolate;"></i>Edit blog</button></a>
-                    <a href="{{url_for('main.delete_blog',blog_id = user.id)}}"><button class="btn btn-sm"><i class="fa fa-trash" style="font-size: 20px;color: coral;"></i>Delete blog</button></a>
-                    {% endif %}
            </div>
            <div class="col-md-6">
                 <h5 class="text-center" style="font-family: 'Mansalva', cursive; text-decoration:underline;font-size:30px;">

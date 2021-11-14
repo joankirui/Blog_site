@@ -1,5 +1,5 @@
 from flask_login import login_required,current_user
-from ..request import get_quotes
+from ..requests import get_quotes
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from ..models import User,Blog,Comment,Subscription
@@ -20,8 +20,8 @@ def index():
         subscription = Subscription(email = email)
         db.session.add(subscription)
         db.session.commit()
-        return render_template('index.html',title = title,blog = blog)
-    return render_template('index.html',title = title,blog = blog)
+        return render_template('index.html',title = title,blog = blog,quotes = quotes)
+    return render_template('index.html',title = title,blog = blog,quotes = quotes)
 
 @main.route('/new/blog/', methods=['GET','POST'])
 @login_required
@@ -68,7 +68,7 @@ def delete_blog(blog_id):
     uname = current_user.username
     db.session.delete(blog)
     db.session.commit()
-    return redirect(url_for("main.proile", uname = uname))
+    return redirect(url_for("main.profile", uname = uname))
 
 @main.route('/updateblog/<int:blog_id>', methods=["GET", "POST"])
 def edit_blog(blog_id):
@@ -122,17 +122,4 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 
 
-
-
-
-
-
-@main.route('/user/<uname>')
-def profile(uname):
-    user = User.query.filter_by(username = uname).first()
-
-    if user is None:
-        abort(404)
-
-    return render_template("profile/profile.html", user = user)
 

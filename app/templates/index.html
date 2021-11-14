@@ -1,9 +1,10 @@
 {% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
    <div class="container" id="cov">
        <div class="row">
-           <div class="col-md-8">
+           <div class="col-md-6" id="blog">
                 {% if blog%}
                 {% for item in blog %}
                 
@@ -11,16 +12,19 @@
                     <p>Post: {{item.blog_content}}</p>
                     <p class="text-muted"> Posted by: {{item.user.username}} <br> On: {{item.posted_on}}</p>
                     <a href="{{url_for('main.new_comment',blog_id=item.id)}}"><button class="btn btn-sm">
-                        <i class="fa fa-comments" style="font-size: 32px; color: turquoise;"></i>
+                        <i class="fa fa-comments" style="font-size: 20px; color: brown;"></i>
                     </button></a>
-                    
-                {% endfor %}
-            {% endif%}
+                    {% endfor %}
+                    {% endif%}
+                    {% if user == current_user %}
+                    <a href="{{url_for('main.edit_blog',blog_id = user.id)}}"><button class="btn btn-sm"><i class="fa-solid fa-pen-to-square" style="font-size: 20px;color: chocolate;"></i>Edit blog</button></a>
+                    <a href="{{url_for('main.delete_blog',blog_id = user.id)}}"><button class="btn btn-sm"><i class="fa fa-trash" style="font-size: 20px;color: coral;"></i>Delete blog</button></a>
+                    {% endif %}
            </div>
-           <div class="col-md-4">
+           <div class="col-md-6">
                 <h5 class="text-center" style="font-family: 'Mansalva', cursive; text-decoration:underline;font-size:30px;">
-                        Quote of the day</h5>
-                    <p class="text-center" style="font-family: 'Dancing Script', cursive; font-size: 42px;">{{quotes.quote}}</p>
+                        Quote</h5>
+                    <p class="text-center" style="font-family: 'Dancing Script', cursive; font-size: 30px;">{{quotes.quote}}</p>
                     <p class="text-muted text-center"><em>By: ~{{quotes.author}}~</em></p>
            </div>
        </div>

@@ -36,6 +36,8 @@
     * Python3.6
     * Flask
     * Heroku
+ ## Known bugs
+    updating blog gives an internal server error
 
 ## License
     * MIT License
